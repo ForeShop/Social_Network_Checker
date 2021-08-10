@@ -99,13 +99,16 @@ def updateCell(val, color):
         
 
 def explicitVisit(socialUrl, socialType):
+    global boolinsta
+    global boolpin
+    global boolfb
     global boolinsta1
     global boolpin1
     global boolfb1
 
     try:
         driver.get(socialUrl)
-        time.sleep(1)
+        time.sleep(3)
         explicitSocialLink = driver.current_url
         source = driver.page_source
         soup = BeautifulSoup(source, 'html.parser')
@@ -114,28 +117,37 @@ def explicitVisit(socialUrl, socialType):
         return
 
     if socialType == 'insta':
+        boolinsta = False
         if "Sorry, this page isn't available" in str(soup):
             print("Instagram Error")
+            boolinsta1 = False
         else:
             print("here 1")
             updateCell(instacellname1, 'green')
             boolinsta1 = True 
     
     elif socialType == 'pin':
+        boolpin = False
         if 'show_error=true' in socialLink:
             print("error in pinterest ",socialLink)
+            boolpin1 = False
+            
         else:
             print("here 10")
             updateCell(pincellname1, 'green')
             boolpin1 = True
         
     elif socialType == 'fb':
+        boolfb = False
         if "This Page Isn't Available" in str(soup):
             print("Facebook Error")
+            boolfb1 = False
+            
         else:
             print("here 11")
             updateCell(fbcellname1, 'green')
             boolfb1 = True
+            
     print("quit in explicit ", i)
     return
         
@@ -145,13 +157,13 @@ for i in range(len(allRecords)):
     each = allRecords[i]
     num = i+2
     
-    boolinsta = False
-    boolpin = False
-    boolfb = False
+    boolinsta = ''
+    boolpin = ''
+    boolfb = ''
     
-    boolinsta1 = False
-    boolpin1 = False
-    boolfb1 = False
+    boolinsta1 = ''
+    boolpin1 = ''
+    boolfb1 = ''
     
     instabool = True
     pinbool = True
@@ -170,7 +182,7 @@ for i in range(len(allRecords)):
         print("Visiting  >>>> ", eachDomain)
         print()
         driver.get(eachDomain)
-        time.sleep(1)
+        time.sleep(3)
     except:
         print("Error in getting domain by driver ::", eachDomain)
         driver.quit()
@@ -197,7 +209,7 @@ for i in range(len(allRecords)):
                                     eachAs.click()  
                                     
 
-    time.sleep(1)
+    time.sleep(2)
     urlname = eachDomain.split("//")[1]
     name = urlname.split(".")[0]
 
@@ -236,11 +248,14 @@ for i in range(len(allRecords)):
                     print("Valid instagram page link : ", socialLink, insta)
                     updateCell(instacellname, 'green')
                     boolinsta = True 
+                else:
+                    boolinsta = False 
 
                 source = driver.page_source
                 soup = BeautifulSoup(source, 'html.parser')
                 if "Sorry, this page isn't available" in str(soup):
                     print("Instagram Error")
+                    boolinsta1 = False 
                 else:
                     updateCell(instacellname1, 'green')
                     boolinsta1 = True 
@@ -254,10 +269,14 @@ for i in range(len(allRecords)):
                     print("Valid pinterest page link : ", socialLink, pin)
                     updateCell(pincellname, 'green')
                     boolpin = True
+                else:
+                    boolpin = False
+                    
                     
                 #onlive checker
                 if 'show_error=true' in socialLink:
                     print("error in pinterest ",socialLink)
+                    boolpin1 = False
                 else:
                     updateCell(pincellname1, 'green')
                     boolpin1 = True
@@ -269,12 +288,15 @@ for i in range(len(allRecords)):
                     print("Valid facebook page link : ", socialLink, fb)
                     updateCell(fbcellname, 'green')
                     boolfb = True
+                else:
+                    boolfb = False
                     
                 #onlive section
                 source = driver.page_source
                 soup = BeautifulSoup(source, 'html.parser')
-                if "This Page Isn't Available" in str(soup):
+                if "You must log in to continue." or "This Page Isn't Available" in str(soup):
                     print("Facebook Error")
+                    boolfb1 = False
                 else:
                     updateCell(fbcellname1, 'green')
                     boolfb1 = True
@@ -295,7 +317,6 @@ for i in range(len(allRecords)):
         res = explicitVisit(fb, 'fb')
         fbbool = False
              
-            
     #ONSITEBOOL
     if boolinsta == False:
         updateCell(instacellname, 'red')
