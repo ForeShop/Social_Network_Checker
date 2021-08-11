@@ -17,7 +17,7 @@ pd.options.display.max_rows = 999
 
 num = os.cpu_count()
 # driverPath = r'C:\Users\USER\chromedriver_win32\chromedriver.exe'
-driverPath = r'C:\Users\Foreshop 6\Desktop\chromedriver\chromedriver.exe'
+driverPath = r'C:\Users\Foreshop 6\chromedriver\chromedriver.exe'
 
 
 # chrome options 
@@ -35,6 +35,8 @@ chrome_options.add_argument("window-size=1200,1100");
 chrome_options.add_argument("--start-maximized")
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
+chrome_options.add_argument(r"--user-data-dir=C:\Users\Foreshop 6\AppData\Local\Google\Chrome\User Data")
+chrome_options.add_argument(r'--profile-directory=Default') 
 
 
 
