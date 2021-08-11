@@ -11,7 +11,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 num = os.cpu_count()
-driverPath = r'C:\Users\USER\chromedriver_win32\chromedriver.exe'
+driverPath = r'C:\Users\Foreshop 6\Desktop\chromedriver\chromedriver.exe'
 print("Chrome driver path is : ", driverPath, num)
 
 # pandas setting for displaying rows and columns
