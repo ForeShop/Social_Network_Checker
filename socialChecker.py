@@ -16,7 +16,8 @@ pd.options.display.max_columns = 999
 pd.options.display.max_rows = 999
 
 num = os.cpu_count()
-driverPath = r'C:\Users\USER\chromedriver_win32\chromedriver.exe'
+# driverPath = r'C:\Users\USER\chromedriver_win32\chromedriver.exe'
+driverPath = r'C:\Users\Foreshop 6\Desktop\chromedriver\chromedriver.exe'
 
 
 # chrome options 
